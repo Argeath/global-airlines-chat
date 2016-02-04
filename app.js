@@ -5,6 +5,7 @@ var socketio = require("socket.io");
 var app = express();
 var http = require("http").Server(app);
 var io = socketio(http);
+var port = process.env.PORT || 3000;
 app.get("/", function (req, res) { res.sendfile("GlobalAirlinesChat/index.html"); });
 var chatObj = new Chat.ChatStore();
 var userObj = new User.UserStore();
@@ -60,7 +61,7 @@ io.on("connection", function (socket) {
         userObj.remove(socket.id);
     });
 });
-http.listen(3000, function () {
-    console.log("listening on *:3000");
+http.listen(port, function () {
+    console.log("listening on *:" + port);
 });
 //# sourceMappingURL=app.js.map
