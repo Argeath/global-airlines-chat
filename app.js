@@ -6,7 +6,7 @@ var app = express();
 var http = require("http").Server(app);
 var io = socketio(http);
 var port = process.env.PORT || 3000;
-app.get("/", function (req, res) { res.sendfile("chat/index.html"); });
+app.get("/", function (req, res) { res.sendfile("index.html"); });
 var chatObj = new Chat.ChatStore();
 var userObj = new User.UserStore();
 var adminKey = "761a5ecac072274f6df2fd973b66a774a2b062652bd89aceeaaebbda40687143";
