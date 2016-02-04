@@ -2,18 +2,9 @@ var User = require("./user");
 var Chat = require("./chat");
 var express = require("express");
 var socketio = require("socket.io");
-var expressSession = require("express-session");
 var app = express();
 var http = require("http").Server(app);
 var io = socketio(http);
-var session = expressSession({
-    secret: "globalChatKeyPlanes",
-    resave: true,
-    saveUninitialized: true
-});
-var sharedsession = require("express-socket.io-session");
-app.use(session);
-io.use(sharedsession(session, { autoSave: true }));
 app.get("/", function (req, res) { res.sendfile("GlobalAirlinesChat/index.html"); });
 var chatObj = new Chat.ChatStore();
 var userObj = new User.UserStore();
