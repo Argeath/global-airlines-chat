@@ -1,5 +1,4 @@
-﻿var port = process.env.PORT || 5000;
-var socket = io.connect("ws://localhost:" + port);
+﻿var socket = io.connect("ws://localhost");
 var username = (Math.random() * 10 >= 5) ? "Arg" : "Arg2";
 var isAdmin = false;
 
