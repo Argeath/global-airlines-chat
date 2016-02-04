@@ -25,6 +25,7 @@ span {
     display: -webkit-flex; 
     display: flex;
     flex-direction: row;
+    max-height: 100px;
 }
 
 .msg:hover {
@@ -55,10 +56,20 @@ span {
     width: 15px;
     height: 15px;
     text-align: center;
-    padding: 3px;
+    padding: 0 4px 8px 4px;
     border: 2px red solid;
     border-radius: 5px;
     display: block;
+    color: red;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.6s ease;
+}
+
+.removeMessage:hover {
+    background: #dc143c;
+    border: 2px #FFF solid;
+    color: #FFF;
 }
 
 .msg_user {

@@ -34,6 +34,7 @@
     <TypeScriptCompile Include="user.ts" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".gitignore" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

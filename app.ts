@@ -68,8 +68,16 @@ io.on("connection", (socket) => {
 
     socket.on("remove", (data: User.IAdminRemove) => {
         if (data) {
-            if (data.adminKey === adminKey) {
+            if (data.adminKey === adminKey && data.msg) {
+                data.msg.date = new Date(data.msg.dateStr);
 
+                if (chatObj.remove(data.msg)) {
+                    data.msg.message = "Wiadomość usunięta.";
+                    io.emit("update", data.msg);
+                } else {
+                    const info: Chat.IInfo = { message: Chat.getError(Chat.EErrorCodes.BadRequest) };
+                    socket.emit("info", info);
+                }
             } else {
                 const info: Chat.IInfo = { message: Chat.getError(Chat.EErrorCodes.Unauthorized) };
                 socket.emit("info", info);

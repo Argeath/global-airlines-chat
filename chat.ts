@@ -21,6 +21,19 @@ module Chat {
                 this.items.dequeue();
         }
 
+        remove(msg: IMessage): boolean {
+            let deleted = false;
+            this.items.forEach((item: IMessage) => {
+                if (item.date.getTime() === msg.date.getTime() && item.message === msg.message) {
+                    item.message = "Wiadomość usunięta.";
+                    deleted = true;
+                    return false;
+                }
+                return true;
+            });
+            return deleted;
+        }
+
         private getMessagePos(msg: IMessage): number {
             var found = -1;
             if (msg == null) return found;

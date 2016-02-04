@@ -13,13 +13,13 @@ function addMessage(msg, front) {
     var msgDate = new Date(msg.date);
 
     var userText = $("<div/>", {
-        "class": 'msg_user'
+        "class": "msg_user"
     });
 
     if (msg.user.photo) {
         userText.prepend($("<img/>", {
             src: msg.user.photo,
-            "class": 'avatar'
+            "class": "avatar"
         }));
     }
     userText.append($("<span/>").text(msg.user.username + ":"));
@@ -30,17 +30,17 @@ function addMessage(msg, front) {
     }).text(msg.message));
 
     tr.append($("<div/>", {
-        "class": 'msg_date'
+        "class": "msg_date"
     }).text(msg.date));
 
     if (isAdmin) {
         tr.append($("<div/>", {
-            "class": 'msg_remove'
+            "class": "msg_remove"
         }).append($("<div/>", {
             "class" : "removeMessage"
         }).on("click", function(event) {
             event.preventDefault();
-            console.log("click");
+
             var row = $(this).parent().parent();
             var newMsg = {
                 dateStr: row.attr("msg_date"),
@@ -55,7 +55,7 @@ function addMessage(msg, front) {
                 "msg": newMsg
             });
         }).append($("<i/>", {
-            "class": "glyphicon glyphicon-remove"
+            "class": "fa fa-times"
         }))));
     }
 
@@ -78,8 +78,20 @@ function addMessage(msg, front) {
         $(last).after(tr);
     else
         $("#content").prepend(tr);
+    return true;
+}
 
-    $("#content").animate({ scrollTop: 0 }, "slow");
+function addInfoMessage(msg) {
+    var tr = $("<div/>", {
+        "class": "msg"
+    });
+
+    tr.append($("<div/>", {
+        "class": "msg_text"
+    }).text(msg.message));
+
+    $("#content").append(tr);
+    $("#content").animate({ scrollTop: $("#content").height() }, "slow");
     return true;
 }
 
@@ -98,6 +110,18 @@ socket.on("connect", function() {
 
     socket.on("history", function (msg) {
         addMessage(msg, false);
+    });
+
+    socket.on("update", function(msg) {
+        $("#content > div").each(function() {
+            if (msg.date === $(this).attr("date") && msg.user.id == $(this).attr("msg_user_id")) {
+                $("#this").find(".msg_text").text(msg.message);
+            }
+        });
+    });
+
+    socket.on("info", function(info) {
+        addInfoMessage(info);
     });
 });
 
@@ -128,8 +152,7 @@ $(function () {
 
     $("#loadMore").on("click", function (event) {
         event.preventDefault();
-
-        console.log("click");
+        $("#content").stop(true).animate({ scrollTop: 0 }, "slow");
 
         var lastMessage = $("#content > div").first();
         var msg = {
