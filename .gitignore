@@ -1,0 +1,11 @@
+﻿node_modules/
+*.js
+*.js.map
+!client_chat.js
+*.d.ts
+bin/
+output/
+typings/
+obj/
+*.csproj.user
+.vs/

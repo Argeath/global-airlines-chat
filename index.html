@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>TypeScript HTML App</title>
+    <link rel="stylesheet" href="app.css" type="text/css"/>
+    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.3.js"></script>
+    <script src="client_chat.js"></script>
+</head>
+<body>
+
+<h1>Global Airlines Chat</h1>
+    <input type="hidden" id="adminKey" value="abc"/>
+    <input type="text" id="username" placeholder="UserName"/>
+    <div id="content">
+        <div id="loadMore">Wczytaj starsze wiadomości...</div>
+    </div>
+    <input type="text" id="text"/>
+    <button id="sendMessage">Send!</button>
+
+</body>
+</html>

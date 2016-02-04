@@ -1,0 +1,17 @@
+{
+  "name": "GlobalAirlinesChat",
+  "version": "0.0.1",
+  "description": "Websocket chat for Global Airlines Simulator",
+  "dependencies": {
+    "express": "^4.13.4",
+    "socket.io": "^1.4.4",
+    "typescript-collections": "^1.0.5"
+  },
+  "devDependencies": {
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-express-server": "^0.5.1",
+    "grunt-parallel": "^0.4.1",
+    "load-grunt-tasks": "^3.4.0"
+  },
+  "scripts" : { "start" : "node server.js" }
+}
