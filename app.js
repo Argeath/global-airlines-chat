@@ -8,7 +8,7 @@ var io = socketio(http);
 var port = process.env.PORT || 3000;
 process.env.PWD = process.cwd();
 app.use("/static", express.static("public"));
-app.get("/", function (req, res) { res.sendfile("/static/index.html"); });
+app.get("/", function (req, res) { res.sendfile("index.html"); });
 var chatObj = new Chat.ChatStore();
 var userObj = new User.UserStore();
 var adminKey = "761a5ecac072274f6df2fd973b66a774a2b062652bd89aceeaaebbda40687143";
