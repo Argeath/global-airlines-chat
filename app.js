@@ -6,14 +6,13 @@ var app = express();
 var http = require("http").Server(app);
 var io = socketio(http);
 var port = process.env.PORT || 3000;
-app.get("/", function (req, res) { res.sendfile("GlobalAirlinesChat/index.html"); });
+app.get("/", function (req, res) { res.sendfile("chat/index.html"); });
 var chatObj = new Chat.ChatStore();
 var userObj = new User.UserStore();
 var adminKey = "761a5ecac072274f6df2fd973b66a774a2b062652bd89aceeaaebbda40687143";
 io.on("connection", function (socket) {
     socket.on("login", function (userData) {
         userObj.store(socket.id, userData);
-        console.log("User " + userData.username + " logged.");
     });
     socket.on("history", function (msg) {
         if (msg)
@@ -57,7 +56,6 @@ io.on("connection", function (socket) {
         }
     });
     socket.on("disconnect", function () {
-        console.log("User " + userObj.get(socket.id).username + " disconnected.");
         userObj.remove(socket.id);
     });
 });
