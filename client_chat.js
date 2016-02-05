@@ -1,4 +1,12 @@
-﻿var socket = io.connect("ws://localhost:3000");
+﻿var loc = window.location, new_uri;
+if (loc.protocol === "https:") {
+    new_uri = "wss:";
+} else {
+    new_uri = "ws:";
+}
+new_uri += "//" + loc.host;
+new_uri += loc.pathname;
+var socket = io.connect(new_uri);
 var username = (Math.random() * 10 >= 5) ? "Arg" : "Arg2";
 var isAdmin = false;
 
